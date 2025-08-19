@@ -67,7 +67,7 @@ class _OnboardingState extends State<Onboarding> {
                           Navigator.push(
                             context,
                             PageTransition(
-                              type: PageTransitionType.leftToRightWithFade, // you can change to rightToLeft, leftToRight, scale, etc.
+                              type: PageTransitionType.fade, // you can change to rightToLeft, leftToRight, scale, etc.
                               duration: const Duration(milliseconds: 550), // animation speed
                               child: const Login(),
                             ),
@@ -102,7 +102,7 @@ class _OnboardingState extends State<Onboarding> {
                           Navigator.push(
                             context,
                             PageTransition(
-                              type: PageTransitionType.rightToLeftWithFade, // or fade / scale / rotate
+                              type: PageTransitionType.fade, // or fade / scale / rotate
                               duration: const Duration(milliseconds: 550), // adjust speed
                               child: const Signup(),
                             ),

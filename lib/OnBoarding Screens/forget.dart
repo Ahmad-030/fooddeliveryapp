@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fooddelivery/SettingScreen/Account.dart';
 import 'package:glass/glass.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
@@ -15,6 +17,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   final TextEditingController _emailController = TextEditingController();
 
   void _resetPassword() {
+    Navigator.push(
+      context,
+      PageTransition(
+        type: PageTransitionType.fade, // or fade / scale / rotate
+        duration: const Duration(milliseconds: 550), // adjust speed
+        child: const Account(),
+      ),
+    );
     final email = _emailController.text.trim();
 
     if (email.isEmpty || !email.contains("@")) {

@@ -25,7 +25,7 @@ class _AccountState extends State<Account> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color(0xFF363D49),
         elevation: 0,
         centerTitle: true,
       ),
@@ -67,12 +67,12 @@ class _AccountState extends State<Account> {
             icon: Icons.account_circle,
             title: "Account",
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (_) => const DummyPage("Account Page")),
-              // );
-            },
+            //   Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (_) => const DummyPage("Account Page")),
+            //   );
+            // },
           ),
           const SizedBox(height: 10),
           GlassListTile(
@@ -201,6 +201,7 @@ class SectionTitle extends StatelessWidget {
 }
 
 // Glass ListTile
+
 class GlassListTile extends StatelessWidget {
   final IconData icon;
   final String title;
@@ -216,7 +217,7 @@ class GlassListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap, // 👈 makes it clickable
+      onTap: onTap,
       borderRadius: BorderRadius.circular(16),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8),
@@ -233,16 +234,20 @@ class GlassListTile extends StatelessWidget {
                 title,
                 style: GoogleFonts.poppins(
                   color: Colors.white,
-                  fontSize: 16,
+                  fontSize: 17,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),
-            const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
+            const Icon(Icons.arrow_forward_ios,
+                color: Colors.white, size: 16),
           ],
         ),
       ).asGlass(
-        tintColor: Colors.white,
+        tintColor: Colors.white70,
         clipBorderRadius: BorderRadius.circular(16),
+        blurX: 110, // 👈 optional: more/less blur
+        blurY: 110, // 👈 optional
       ),
     );
   }
