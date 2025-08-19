@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fooddelivery/OnBoarding%20Screens/forget.dart';
 import 'package:glass/glass.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-// Import your ForgotPassword screen
+import 'package:page_transition/page_transition.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -13,6 +14,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,8 +80,6 @@ class _LoginState extends State<Login> {
                 ),
               ),
 
-              const SizedBox(height: 0),
-
               // Glass container with form
               Padding(
                 padding: const EdgeInsets.all(20),
@@ -98,6 +100,7 @@ class _LoginState extends State<Login> {
 
                         // Email/Username
                         TextField(
+                          controller: emailController,
                           style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                             hintText: "Email or Username",
@@ -110,10 +113,12 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                         ).asGlass(blurX: 10, blurY: 10, tintColor: Colors.black),
+
                         const SizedBox(height: 12),
 
                         // Password
                         TextField(
+                          controller: passwordController,
                           obscureText: true,
                           style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
@@ -127,12 +132,31 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                         ).asGlass(blurX: 10, blurY: 10, tintColor: Colors.black),
+
                         const SizedBox(height: 20),
 
                         // Login button
                         InkWell(
                           onTap: () {
-                            // TODO: Add login logic
+                            String email = emailController.text.trim();
+                            String password = passwordController.text.trim();
+
+                            if (email.isNotEmpty && password.isNotEmpty) {
+                              // Example: Successful login
+                              showTopSnackBar(
+                                Overlay.of(context),
+                                const CustomSnackBar.success(
+                                  message: "✅ Login successful!",
+                                ),
+                              );
+                            } else {
+                              showTopSnackBar(
+                                Overlay.of(context),
+                                const CustomSnackBar.error(
+                                  message: "❌ Please enter email & password",
+                                ),
+                              );
+                            }
                           },
                           child: Container(
                             width: double.infinity,
@@ -155,17 +179,19 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                         ),
+
                         const SizedBox(height: 12),
 
                         // Forgot password link
                         Center(
                           child: TextButton(
                             onPressed: () {
-                              // Navigate to ForgotPassword screen
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) =>  ForgotPassword(),
+                                PageTransition(
+                                  type: PageTransitionType.fade,
+                                  duration: const Duration(milliseconds: 450),
+                                  child: const ForgotPassword(),
                                 ),
                               );
                             },

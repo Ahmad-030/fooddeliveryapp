@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:glass/glass.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -10,6 +12,36 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+  final TextEditingController _emailController = TextEditingController();
+
+  void _resetPassword() {
+    final email = _emailController.text.trim();
+
+    if (email.isEmpty || !email.contains("@")) {
+      final overlay = Overlay.of(context);
+      if (overlay != null) {
+        showTopSnackBar(
+          overlay,
+          const CustomSnackBar.error(
+            message: "⚠️ Please enter a valid email address",
+          ),
+        );
+      }
+      return;
+    }
+
+    // TODO: Add your backend reset password API call here
+    final overlay = Overlay.of(context);
+    if (overlay != null) {
+      showTopSnackBar(
+        overlay,
+        CustomSnackBar.success(
+          message: "📩 Reset link sent to $email",
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,9 +67,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   alignment: Alignment.centerLeft,
                   child: IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+                    onPressed: () => Navigator.pop(context),
                   ),
                 ),
               ),
@@ -73,9 +103,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 ),
               ),
 
-              const SizedBox(height: 0),
-
-              // Glass container with email input and button
+              // Glass container
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Center(
@@ -95,6 +123,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
                         // Email input
                         TextField(
+                          controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
                           style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
@@ -112,9 +141,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
                         // Reset Password button
                         InkWell(
-                          onTap: () {
-                            // TODO: Add reset password logic
-                          },
+                          onTap: _resetPassword,
                           child: Container(
                             width: double.infinity,
                             padding: const EdgeInsets.symmetric(vertical: 15),
@@ -145,8 +172,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   ),
                 ),
               ),
-
-              const SizedBox(height: 30),
             ],
           ),
         ),

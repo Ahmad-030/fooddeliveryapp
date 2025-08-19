@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:glass/glass.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -10,6 +12,12 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  // Controllers
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController numberController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,9 +43,7 @@ class _SignupState extends State<Signup> {
                   alignment: Alignment.centerLeft,
                   child: IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+                    onPressed: () => Navigator.pop(context),
                   ),
                 ),
               ),
@@ -95,75 +101,73 @@ class _SignupState extends State<Signup> {
 
                         // Username
                         TextField(
+                          controller: usernameController,
                           style: const TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            hintText: "Username",
-                            hintStyle: const TextStyle(color: Colors.white70),
-                            filled: true,
-                            fillColor: Colors.black.withOpacity(0.2),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(color: Colors.white54),
-                            ),
-                          ),
+                          decoration: _inputDecoration("Username"),
                         ).asGlass(blurX: 10, blurY: 10, tintColor: Colors.black),
+
                         const SizedBox(height: 12),
 
                         // Number
                         TextField(
+                          controller: numberController,
                           keyboardType: TextInputType.phone,
                           style: const TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            hintText: "Number",
-                            hintStyle: const TextStyle(color: Colors.white70),
-                            filled: true,
-                            fillColor: Colors.black.withOpacity(0.2),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(color: Colors.white54),
-                            ),
-                          ),
+                          decoration: _inputDecoration("Number"),
                         ).asGlass(blurX: 10, blurY: 10, tintColor: Colors.black),
+
                         const SizedBox(height: 12),
 
                         // Email
                         TextField(
+                          controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           style: const TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            hintText: "Email",
-                            hintStyle: const TextStyle(color: Colors.white70),
-                            filled: true,
-                            fillColor: Colors.black.withOpacity(0.2),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(color: Colors.white54),
-                            ),
-                          ),
+                          decoration: _inputDecoration("Email"),
                         ).asGlass(blurX: 10, blurY: 10, tintColor: Colors.black),
+
                         const SizedBox(height: 12),
 
                         // Password
                         TextField(
+                          controller: passwordController,
                           obscureText: true,
                           style: const TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            hintText: "Password",
-                            hintStyle: const TextStyle(color: Colors.white70),
-                            filled: true,
-                            fillColor: Colors.black.withOpacity(0.2),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(color: Colors.white54),
-                            ),
-                          ),
+                          decoration: _inputDecoration("Password"),
                         ).asGlass(blurX: 10, blurY: 10, tintColor: Colors.black),
+
                         const SizedBox(height: 20),
 
                         // Create Account button
                         InkWell(
                           onTap: () {
-                            // TODO: Add signup logic
+                            final username = usernameController.text.trim();
+                            final number = numberController.text.trim();
+                            final email = emailController.text.trim();
+                            final password = passwordController.text.trim();
+
+                            if (username.isEmpty ||
+                                number.isEmpty ||
+                                email.isEmpty ||
+                                password.isEmpty) {
+                              showTopSnackBar(
+                                Overlay.of(context),
+                                const CustomSnackBar.error(
+                                  message: "⚠️ Please fill in all fields.",
+                                ),
+                              );
+                            } else {
+                              showTopSnackBar(
+                                Overlay.of(context),
+                                const CustomSnackBar.success(
+                                  message:
+                                  "🎉 Account created successfully! Welcome 🚀",
+                                ),
+                              );
+
+                              // Example navigation
+                              // Navigator.pushReplacementNamed(context, '/home');
+                            }
                           },
                           child: Container(
                             width: double.infinity,
@@ -185,21 +189,30 @@ class _SignupState extends State<Signup> {
                               ),
                             ),
                           ),
-                        ),
+                        )
                       ],
                     ),
-                  ).asGlass(
-                    blurX: 5,
-                    blurY: 5,
-                    tintColor: Colors.black,
-                  ),
+                  ).asGlass(blurX: 5, blurY: 5, tintColor: Colors.black),
                 ),
               ),
-
               const SizedBox(height: 30),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  // Helper Input Decoration
+  InputDecoration _inputDecoration(String hint) {
+    return InputDecoration(
+      hintText: hint,
+      hintStyle: const TextStyle(color: Colors.white70),
+      filled: true,
+      fillColor: Colors.black.withOpacity(0.2),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15),
+        borderSide: const BorderSide(color: Colors.white54),
       ),
     );
   }

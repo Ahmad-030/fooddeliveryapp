@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glass/glass.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 // Import your login and signup screens
 import 'login.dart';
@@ -65,8 +66,10 @@ class _OnboardingState extends State<Onboarding> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => const Login(),
+                            PageTransition(
+                              type: PageTransitionType.leftToRightWithFade, // you can change to rightToLeft, leftToRight, scale, etc.
+                              duration: const Duration(milliseconds: 550), // animation speed
+                              child: const Login(),
                             ),
                           );
                         },
@@ -98,10 +101,13 @@ class _OnboardingState extends State<Onboarding> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => const Signup(),
+                            PageTransition(
+                              type: PageTransitionType.rightToLeftWithFade, // or fade / scale / rotate
+                              duration: const Duration(milliseconds: 550), // adjust speed
+                              child: const Signup(),
                             ),
                           );
+
                         },
                         borderRadius: BorderRadius.circular(15),
                         child: Container(

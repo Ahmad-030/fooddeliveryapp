@@ -1,10 +1,15 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:fooddelivery/OnBoarding%20Screens/Login.dart';
 import 'package:fooddelivery/OnBoarding%20Screens/OnBoarding.dart';
 import 'package:fooddelivery/OnBoarding%20Screens/forget.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      enabled: true,
+        builder: (context) => MyApp())
+      );
 }
 
 class MyApp extends StatelessWidget {
