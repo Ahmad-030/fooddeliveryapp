@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fooddelivery/OnBoarding%20Screens/forget.dart';
+import 'package:fooddelivery/homeScreens/BOTTOMNAV.dart';
+import 'package:fooddelivery/homeScreens/menu.dart';
 import 'package:glass/glass.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
@@ -138,6 +140,14 @@ class _LoginState extends State<Login> {
                         // Login button
                         InkWell(
                           onTap: () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.fade, // or fade / scale / rotate
+                                  duration: const Duration(milliseconds: 550), // adjust speed
+                                  child: BottomNav(),
+                                ),
+                              );
                             String email = emailController.text.trim();
                             String password = passwordController.text.trim();
 

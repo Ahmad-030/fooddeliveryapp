@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fooddelivery/OnBoarding%20Screens/Login.dart';
 import 'package:fooddelivery/OnBoarding%20Screens/OnBoarding.dart';
 import 'package:fooddelivery/OnBoarding%20Screens/forget.dart';
-import 'package:fooddelivery/SettingScreen/Account.dart';
+import 'package:fooddelivery/SettingScreen/profiledrawer.dart';
 
 void main() {
   runApp(
