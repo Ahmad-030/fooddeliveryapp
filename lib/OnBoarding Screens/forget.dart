@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fooddelivery/SettingScreen/profiledrawer.dart';
-import 'package:fooddelivery/homeScreens/BOTTOMNAV.dart';
+import 'package:fooddelivery/homeScreens/HomeScreens/BOTTOMNAV.dart';
 import 'package:glass/glass.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';

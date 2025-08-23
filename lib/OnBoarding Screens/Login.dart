@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fooddelivery/OnBoarding%20Screens/forget.dart';
-import 'package:fooddelivery/homeScreens/BOTTOMNAV.dart';
-import 'package:fooddelivery/homeScreens/menu.dart';
+import 'package:fooddelivery/homeScreens/HomeScreens/BOTTOMNAV.dart';
 import 'package:glass/glass.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';

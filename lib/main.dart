@@ -6,11 +6,7 @@ import 'package:fooddelivery/OnBoarding%20Screens/forget.dart';
 import 'package:fooddelivery/SettingScreen/profiledrawer.dart';
 
 void main() {
-  runApp(
-    DevicePreview(
-      enabled: true,
-        builder: (context) => MyApp())
-      );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
